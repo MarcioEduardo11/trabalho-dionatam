@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid — Hub de Aulas</title>
+  <meta name="description" content="Como o CSS Grid divide elementos em linhas e colunas, com exemplos práticos e playground interativo.">
+  <link rel="stylesheet" href="hub.css">
+  <link rel="stylesheet" href="grid.css">
+  <script src="aprenda.js" defer></script>
+</head>
+<body>
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="voltar" href="index.html"><span aria-hidden="true">⬅</span> Voltar ao Hub</a>
+      <h1>Grid</h1>
+      <p>Layout <strong>bidimensional</strong>: divide a área em <strong>linhas E colunas</strong> ao mesmo tempo, e posiciona os itens nas células.</p>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <nav class="secao sumario" aria-label="Neste tópico">
+      <h2>Neste tópico</h2>
+      <ol>
+        <li><a href="#o-que-e">O que é Grid?</a></li>
+        <li><a href="#linhas-colunas">Linhas e colunas</a></li>
+        <li><a href="#posicionando">Posicionando itens</a></li>
+        <li><a href="#areas">Áreas nomeadas</a></li>
+        <li><a href="#responsivo">Grid responsivo</a></li>
+        <li><a href="#comparacao">Grid x Flexbox</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#teste">Área de teste</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1 -->
+    <section class="secao" id="o-que-e" aria-labelledby="t-oque">
+      <h2 id="t-oque">1. O que é Grid?</h2>
+      <p>O CSS Grid cria uma <strong>grade</strong> no elemento pai (<em>grid container</em>). Os filhos diretos (<em>grid items</em>) são colocados nas células dessa grade, que é formada por linhas e colunas.</p>
+
+      <div class="exemplo">
+        <figure>
+          <div class="demo g-3col" role="group" aria-label="Grade de 3 colunas e 2 linhas">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+            <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+          </div>
+          <figcaption>Uma grade de 3 colunas × 2 linhas: os itens preenchem as células da esquerda para a direita, de cima para baixo.</figcaption>
+        </figure>
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}</code></pre>
+      </div>
+
+      <h3>Vocabulário</h3>
+      <ul>
+        <li><strong>Trilha (<em>track</em>):</strong> uma coluna ou uma linha da grade.</li>
+        <li><strong>Célula:</strong> o encontro de uma linha com uma coluna (como uma célula de tabela).</li>
+        <li><strong>Linhas de grade (<em>grid lines</em>):</strong> as divisórias numeradas, começando em <code>1</code>. Uma grade com 3 colunas tem 4 linhas verticais.</li>
+        <li><strong>Área:</strong> conjunto de células vizinhas ocupado por um item.</li>
+        <li><strong><code>gap</code>:</strong> o espaço entre as trilhas.</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section class="secao" id="linhas-colunas" aria-labelledby="t-lc">
+      <h2 id="t-lc">2. Dividindo em linhas e colunas</h2>
+
+      <div class="tabela-rolagem">
+        <table>
+          <caption>Propriedades do <strong>container</strong></caption>
+          <thead>
+            <tr><th scope="col">Propriedade</th><th scope="col">O que faz</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>display: grid</code></td><td>Ativa o Grid.</td></tr>
+            <tr><td><code>grid-template-columns</code></td><td>Define quantas colunas existem e a largura de cada uma.</td></tr>
+            <tr><td><code>grid-template-rows</code></td><td>Define a altura das linhas. Linhas extras ficam com altura automática.</td></tr>
+            <tr><td><code>gap</code> (<code>row-gap</code>, <code>column-gap</code>)</td><td>Espaço entre linhas e colunas.</td></tr>
+            <tr><td><code>justify-items</code></td><td>Alinha o item <em>horizontalmente</em> dentro da célula.</td></tr>
+            <tr><td><code>align-items</code></td><td>Alinha o item <em>verticalmente</em> dentro da célula.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Unidades das trilhas</h3>
+      <ul>
+        <li><code>px</code>, <code>rem</code>, <code>%</code>: tamanhos fixos ou proporcionais ao pai.</li>
+        <li><code>fr</code> (fração): divide o <strong>espaço livre</strong>. <code>1fr 2fr</code> dá ao 2º o dobro do 1º.</li>
+        <li><code>auto</code>: ajusta ao conteúdo.</li>
+        <li><code>repeat(3, 1fr)</code>: atalho para <code>1fr 1fr 1fr</code>.</li>
+        <li><code>minmax(100px, 1fr)</code>: nunca menor que 100px, nunca maior que 1 fração.</li>
+      </ul>
+
+      <div class="exemplo">
+        <figure>
+          <div class="demo g-mista" role="group" aria-label="Colunas de 110px, 1fr e 2fr">
+            <div class="item">110px</div><div class="item">1fr</div><div class="item">2fr</div>
+          </div>
+          <figcaption>Misturando tamanho fixo e frações.</figcaption>
+        </figure>
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: 110px 1fr 2fr;
+}</code></pre>
+      </div>
+
+      <div class="exemplo">
+        <figure>
+          <div class="demo g-linhas" role="group" aria-label="Grade com linhas de 3rem e 6rem">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+            <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+          </div>
+          <figcaption>Linhas com alturas diferentes: a 1ª tem 3rem e a 2ª tem 6rem.</figcaption>
+        </figure>
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 3rem 6rem;
+  gap: 0.5rem;
+}</code></pre>
+      </div>
+
+      <h3>Experimente: playground do Grid</h3>
+      <p>Troque colunas, linhas e alinhamento. Adicione itens para ver como a grade cria novas linhas automaticamente.</p>
+
+      <div class="playground" data-playground>
+        <div class="controles">
+          <div class="controle">
+            <label for="pg-cols">grid-template-columns</label>
+            <select id="pg-cols" data-prop="grid-template-columns">
+              <option value="repeat(3, 1fr)">repeat(3, 1fr)</option>
+              <option value="repeat(2, 1fr)">repeat(2, 1fr)</option>
+              <option value="repeat(4, 1fr)">repeat(4, 1fr)</option>
+              <option value="1fr 2fr">1fr 2fr</option>
+              <option value="100px 1fr 1fr">100px 1fr 1fr</option>
+              <option value="repeat(auto-fit, minmax(90px, 1fr))">repeat(auto-fit, minmax(90px, 1fr))</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pg-rows">grid-template-rows</label>
+            <select id="pg-rows" data-prop="grid-template-rows">
+              <option value="none">none (automático)</option>
+              <option value="4rem 6rem">4rem 6rem</option>
+              <option value="repeat(2, 5rem)">repeat(2, 5rem)</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pg-gap">gap</label>
+            <select id="pg-gap" data-prop="gap">
+              <option>0.5rem</option><option>0</option><option>1rem</option><option>2rem</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pg-ji">justify-items</label>
+            <select id="pg-ji" data-prop="justify-items">
+              <option>stretch</option><option>start</option><option>center</option><option>end</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pg-ai">align-items</label>
+            <select id="pg-ai" data-prop="align-items">
+              <option>stretch</option><option>start</option><option>center</option><option>end</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="demo" data-alvo data-base="display: grid;" role="group" aria-label="Resultado do playground">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+            <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+          </div>
+          <div class="botoes">
+            <button type="button" data-add>+ Adicionar item</button>
+            <button type="button" data-remove>− Remover item</button>
+          </div>
+          <p class="sr-only" role="status" data-status></p>
+          <pre><code data-saida></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="secao" id="posicionando" aria-labelledby="t-pos">
+      <h2 id="t-pos">3. Posicionando itens nas linhas e colunas</h2>
+      <p>Cada item pode ocupar mais de uma célula. Para isso usamos os números das <strong>linhas de grade</strong>:</p>
+
+      <div class="tabela-rolagem">
+        <table>
+          <caption>Propriedades dos <strong>itens</strong></caption>
+          <thead>
+            <tr><th scope="col">Propriedade</th><th scope="col">Exemplo</th><th scope="col">Significado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>grid-column</code></td><td><code>1 / 3</code></td><td>Começa na linha 1 e termina na linha 3 (ocupa 2 colunas).</td></tr>
+            <tr><td><code>grid-column</code></td><td><code>span 2</code></td><td>Ocupa 2 colunas a partir de onde estiver.</td></tr>
+            <tr><td><code>grid-row</code></td><td><code>1 / 3</code></td><td>Ocupa as linhas 1 e 2.</td></tr>
+            <tr><td><code>justify-self</code> / <code>align-self</code></td><td><code>center</code></td><td>Alinha só este item dentro da célula.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="exemplo">
+        <figure>
+          <div class="demo g-span" role="group" aria-label="Item destaque ocupando 2 colunas e 2 linhas">
+            <div class="item destaque">Destaque<br>2×2</div>
+            <div class="item">2</div><div class="item">3</div>
+            <div class="item largo">4 (span 2)</div>
+            <div class="item">5</div><div class="item">6</div>
+          </div>
+          <figcaption>O destaque ocupa as colunas 1–2 e as linhas 1–2.</figcaption>
+        </figure>
+<pre><code>.destaque {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+.largo {
+  grid-column: span 2;
+}</code></pre>
+      </div>
+
+      <h3>Alinhamento dentro das células</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="demo g-alinha" role="group" aria-label="Itens centralizados nas células">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+            <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+          </div>
+          <figcaption>Os itens ficam centralizados em cada célula.</figcaption>
+        </figure>
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+/* atalho para os dois: place-items: center; */</code></pre>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="secao" id="areas" aria-labelledby="t-areas">
+      <h2 id="t-areas">4. Áreas nomeadas: desenhando o layout em texto</h2>
+      <p>Com <code>grid-template-areas</code> você "desenha" a página usando nomes. Cada linha de texto é uma linha da grade, e repetir um nome faz a área se estender.</p>
+
+      <div class="exemplo">
+        <figure>
+          <div class="demo g-areas" role="group" aria-label="Layout de página: cabeçalho, menu, conteúdo e rodapé">
+            <div class="item a-cabecalho">Cabeçalho</div>
+            <div class="item a-menu">Menu</div>
+            <div class="item a-conteudo">Conteúdo</div>
+            <div class="item a-rodape">Rodapé</div>
+          </div>
+        </figure>
+<pre><code>.pagina {
+  display: grid;
+  grid-template-areas:
+    "cabecalho cabecalho"
+    "menu      conteudo"
+    "rodape    rodape";
+  grid-template-columns: 110px 1fr;
+}
+.a-cabecalho { grid-area: cabecalho; }
+.a-menu      { grid-area: menu; }
+.a-conteudo  { grid-area: conteudo; }
+.a-rodape    { grid-area: rodape; }</code></pre>
+      </div>
+      <div class="nota">
+        <p><strong>Dica de responsividade:</strong> no celular, basta redefinir o <code>grid-template-areas</code> em uma <code>@media</code> com uma área por linha, e o layout empilha sem mexer no HTML.</p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="secao" id="responsivo" aria-labelledby="t-resp">
+      <h2 id="t-resp">5. Grid responsivo sem media query</h2>
+      <p>A combinação <code>repeat(auto-fit, minmax(...))</code> faz a grade decidir sozinha quantas colunas cabem.</p>
+
+      <div class="exemplo">
+        <figure>
+          <div class="demo g-auto" role="group" aria-label="Grade que ajusta o número de colunas">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+            <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+          </div>
+          <figcaption>Arraste o canto inferior direito da caixa (ou redimensione a janela) e veja as colunas mudarem.</figcaption>
+        </figure>
+<pre><code>.container {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+}</code></pre>
+      </div>
+      <p>Leitura: "crie quantas colunas de <em>no mínimo</em> 110px couberem; o espaço que sobrar é dividido igualmente entre elas".</p>
+    </section>
+
+    <!-- 6 -->
+    <section class="secao" id="comparacao" aria-labelledby="t-comp">
+      <h2 id="t-comp">6. Grid ou Flexbox?</h2>
+      <div class="tabela-rolagem">
+        <table>
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Flexbox</th><th scope="col">Grid</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Dimensões</th><td>Uma (linha <em>ou</em> coluna)</td><td>Duas (linhas <em>e</em> colunas)</td></tr>
+            <tr><th scope="row">Quem manda no layout</th><td>O conteúdo dos itens</td><td>A grade definida no container</td></tr>
+            <tr><th scope="row">Bom para</th><td>Barras de menu, alinhamentos, grupos de botões</td><td>Páginas inteiras, galerias, painéis</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Eles se complementam: é comum usar <strong>Grid para a estrutura da página</strong> e <strong>Flexbox para alinhar o conteúdo dentro de cada área</strong>.</p>
+    </section>
+
+    <!-- 7 -->
+    <section class="secao" id="atividade" aria-labelledby="t-ativ">
+      <h2 id="t-ativ">7. Atividade prática</h2>
+      <ol>
+        <li>Crie uma grade com 3 colunas iguais e 6 itens usando <code>repeat(3, 1fr)</code>.</li>
+        <li>Mude para <code>200px 1fr 2fr</code> e observe como o espaço é dividido.</li>
+        <li>Faça o primeiro item ocupar 2 colunas com <code>grid-column: span 2</code>.</li>
+        <li>Monte um layout de página com cabeçalho, menu lateral, conteúdo e rodapé usando <code>grid-template-areas</code>.</li>
+        <li>Torne a galeria responsiva com <code>auto-fit</code> e <code>minmax(150px, 1fr)</code>.</li>
+        <li>Desafio: no layout do item 4, use Flexbox para alinhar o conteúdo do cabeçalho.</li>
+      </ol>
+    </section>
+
+    <!-- 8 -->
+    <section class="secao" id="teste" aria-labelledby="t-teste">
+      <h2 id="t-teste">8. Área de teste</h2>
+      <p>Edite o CSS do container e veja o resultado na hora. Declarações inválidas são ignoradas.</p>
+      <div class="teste">
+        <div>
+          <label for="editor-grid">CSS do container</label>
+<textarea id="editor-grid" data-editor data-alvo="alvo-grid" spellcheck="false" rows="7">display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-auto-rows: 4rem;
+gap: 0.5rem;
+justify-items: stretch;
+align-items: center;</textarea>
+          <div class="botoes"><button type="button" data-reset="editor-grid">Restaurar código inicial</button></div>
+        </div>
+        <div>
+          <p id="rotulo-grid" class="legenda">Resultado:</p>
+          <div class="demo" id="alvo-grid" role="group" aria-labelledby="rotulo-grid">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+            <div class="item">4</div><div class="item">5</div><div class="item">6</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="entre-aulas" aria-label="Navegação entre aulas">
+      <a href="flexbox.html"><span aria-hidden="true">⬅</span>&nbsp;Anterior: Flexbox</a>
+      <a href="index.html">Voltar ao Hub</a>
+    </nav>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p>Sites para estudar:</p>
+      <ul>
+        <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">Mozilla (MDN) — CSS</a></li>
+        <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS-Tricks — Guia completo de Grid</a></li>
+        <li><a href="https://cssgridgarden.com/#pt-br">Grid Garden (jogo)</a></li>
+      </ul>
+      <p>Feito para a atividade de IHC — © 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

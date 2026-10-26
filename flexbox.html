@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox — Hub de Aulas</title>
+  <meta name="description" content="Conceitos básicos e intermediários de Flexbox, com exemplos práticos e playground interativo.">
+  <link rel="stylesheet" href="hub.css">
+  <link rel="stylesheet" href="flexbox.css">
+  <script src="aprenda.js" defer></script>
+</head>
+<body>
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="voltar" href="index.html"><span aria-hidden="true">⬅</span> Voltar ao Hub</a>
+      <h1>Flexbox</h1>
+      <p>Layout <strong>unidimensional</strong>: organiza os itens em uma linha <em>ou</em> em uma coluna, distribuindo o espaço entre eles.</p>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <nav class="secao sumario" aria-label="Neste tópico">
+      <h2>Neste tópico</h2>
+      <ol>
+        <li><a href="#o-que-e">O que é Flexbox?</a></li>
+        <li><a href="#basico">Conceitos básicos</a></li>
+        <li><a href="#intermediario">Conceitos intermediários</a></li>
+        <li><a href="#aplicacao">Aplicações reais</a></li>
+        <li><a href="#atividade">Atividade prática</a></li>
+        <li><a href="#teste">Área de teste</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1 -->
+    <section class="secao" id="o-que-e" aria-labelledby="t-oque">
+      <h2 id="t-oque">1. O que é Flexbox?</h2>
+      <p>O Flexbox (<em>Flexible Box Layout</em>) é um modelo de layout do CSS pensado para alinhar e distribuir espaço entre itens em <strong>uma única direção</strong>. Basta declarar <code>display: flex</code> no elemento <strong>pai</strong> (o <em>container</em>); os filhos diretos viram <em>flex items</em>.</p>
+
+      <div class="exemplo">
+        <figure>
+          <div class="demo f-sem" role="group" aria-label="Itens sem flex, empilhados">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+          </div>
+          <figcaption>Sem flex: os <code>div</code> ocupam a largura toda e empilham.</figcaption>
+        </figure>
+        <figure>
+          <div class="demo f-linha" role="group" aria-label="Itens com flex, lado a lado">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+          </div>
+          <figcaption>Com <code>display: flex</code>: os itens ficam lado a lado.</figcaption>
+        </figure>
+      </div>
+
+<pre><code>.container {
+  display: flex;
+}</code></pre>
+
+      <h3>Os dois eixos</h3>
+      <p>Todo container flex tem dois eixos. Entender isso é a chave do Flexbox:</p>
+      <ul>
+        <li><strong>Eixo principal</strong> (<em>main axis</em>): direção em que os itens fluem. Por padrão é horizontal (<code>row</code>).</li>
+        <li><strong>Eixo transversal</strong> (<em>cross axis</em>): perpendicular ao principal. Por padrão é vertical.</li>
+      </ul>
+      <div class="nota">
+        <p><strong>Regra de ouro:</strong> <code>justify-content</code> alinha no <em>eixo principal</em>; <code>align-items</code> alinha no <em>eixo transversal</em>. Se você trocar para <code>flex-direction: column</code>, os eixos também trocam de lugar.</p>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="secao" id="basico" aria-labelledby="t-basico">
+      <h2 id="t-basico">2. Conceitos básicos (propriedades do container)</h2>
+
+      <div class="tabela-rolagem">
+        <table>
+          <caption>Propriedades aplicadas no <strong>pai</strong></caption>
+          <thead>
+            <tr><th scope="col">Propriedade</th><th scope="col">O que faz</th><th scope="col">Valores comuns</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>display</code></td><td>Ativa o Flexbox no container.</td><td><code>flex</code>, <code>inline-flex</code></td></tr>
+            <tr><td><code>flex-direction</code></td><td>Define a direção do eixo principal.</td><td><code>row</code>, <code>row-reverse</code>, <code>column</code>, <code>column-reverse</code></td></tr>
+            <tr><td><code>justify-content</code></td><td>Distribui os itens no eixo principal.</td><td><code>flex-start</code>, <code>center</code>, <code>flex-end</code>, <code>space-between</code>, <code>space-around</code>, <code>space-evenly</code></td></tr>
+            <tr><td><code>align-items</code></td><td>Alinha os itens no eixo transversal.</td><td><code>stretch</code>, <code>flex-start</code>, <code>center</code>, <code>flex-end</code>, <code>baseline</code></td></tr>
+            <tr><td><code>flex-wrap</code></td><td>Permite quebrar para outra linha quando falta espaço.</td><td><code>nowrap</code>, <code>wrap</code>, <code>wrap-reverse</code></td></tr>
+            <tr><td><code>gap</code></td><td>Espaço entre os itens (sem usar margin).</td><td><code>0</code>, <code>8px</code>, <code>1rem</code>…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Experimente: playground do container</h3>
+      <p>Mude as propriedades abaixo e veja o resultado e o código gerado. Use os botões para adicionar mais itens e ver o efeito do <code>flex-wrap</code>.</p>
+
+      <div class="playground" data-playground>
+        <div class="controles">
+          <div class="controle">
+            <label for="pf-dir">flex-direction</label>
+            <select id="pf-dir" data-prop="flex-direction">
+              <option>row</option><option>row-reverse</option><option>column</option><option>column-reverse</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pf-jc">justify-content</label>
+            <select id="pf-jc" data-prop="justify-content">
+              <option>flex-start</option><option>center</option><option>flex-end</option>
+              <option>space-between</option><option>space-around</option><option>space-evenly</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pf-ai">align-items</label>
+            <select id="pf-ai" data-prop="align-items">
+              <option>stretch</option><option>flex-start</option><option>center</option><option>flex-end</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pf-wrap">flex-wrap</label>
+            <select id="pf-wrap" data-prop="flex-wrap">
+              <option>nowrap</option><option>wrap</option><option>wrap-reverse</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pf-gap">gap</label>
+            <select id="pf-gap" data-prop="gap">
+              <option>0</option><option>0.5rem</option><option>1rem</option><option>2rem</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="demo demo-alta" data-alvo data-base="display: flex;" role="group" aria-label="Resultado do playground">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+          </div>
+          <div class="botoes">
+            <button type="button" data-add>+ Adicionar item</button>
+            <button type="button" data-remove>− Remover item</button>
+          </div>
+          <p class="sr-only" role="status" data-status></p>
+          <pre><code data-saida></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="secao" id="intermediario" aria-labelledby="t-inter">
+      <h2 id="t-inter">3. Conceitos intermediários (propriedades dos itens)</h2>
+      <p>Além do container, cada <strong>item</strong> pode ter regras próprias. É aqui que o Flexbox fica poderoso.</p>
+
+      <div class="tabela-rolagem">
+        <table>
+          <caption>Propriedades aplicadas nos <strong>filhos</strong></caption>
+          <thead>
+            <tr><th scope="col">Propriedade</th><th scope="col">O que faz</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>flex-grow</code></td><td>Quanto o item cresce para ocupar o espaço que sobrou (proporção). Padrão: <code>0</code>.</td></tr>
+            <tr><td><code>flex-shrink</code></td><td>Quanto o item encolhe quando falta espaço. Padrão: <code>1</code>.</td></tr>
+            <tr><td><code>flex-basis</code></td><td>Tamanho inicial do item no eixo principal, antes de crescer ou encolher. Padrão: <code>auto</code>.</td></tr>
+            <tr><td><code>flex</code></td><td>Atalho: <code>flex: grow shrink basis</code>. Ex.: <code>flex: 1</code> equivale a <code>1 1 0</code>.</td></tr>
+            <tr><td><code>align-self</code></td><td>Sobrescreve o <code>align-items</code> só para este item.</td></tr>
+            <tr><td><code>order</code></td><td>Muda a ordem visual sem mexer no HTML. Padrão: <code>0</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>flex-grow: dividindo o espaço que sobra</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="demo f-grow" role="group" aria-label="Itens com flex-grow diferentes">
+            <div class="item">Fixo</div><div class="item">1x</div><div class="item">2x</div>
+          </div>
+          <figcaption>O primeiro mantém seu tamanho; o 2º recebe 1 parte e o 3º recebe 2 partes do espaço livre.</figcaption>
+        </figure>
+<pre><code>.item:nth-child(1) { flex: 0 0 auto; }
+.item:nth-child(2) { flex: 1; }
+.item:nth-child(3) { flex: 2; }</code></pre>
+      </div>
+
+      <h3>flex-basis e wrap: itens que se adaptam</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="demo f-basis" role="group" aria-label="Itens com flex-basis">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+          </div>
+          <figcaption>Cada item prefere 140px, mas pode crescer e encolher. Redimensione a janela!</figcaption>
+        </figure>
+<pre><code>.item {
+  flex: 1 1 140px;
+  /* cresce | encolhe | tamanho base */
+}</code></pre>
+      </div>
+
+      <h3>order e align-self: controle individual</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="demo f-order" role="group" aria-label="Itens com order e align-self">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+          </div>
+          <figcaption>A ordem visual aparece como 2, 3, 1. O item 2 vai para baixo e o 3 para o centro.</figcaption>
+        </figure>
+<pre><code>.item:nth-child(1) { order: 3; }
+.item:nth-child(2) { order: 1; align-self: flex-end; }
+.item:nth-child(3) { order: 2; align-self: center; }</code></pre>
+      </div>
+      <div class="nota">
+        <p><strong>Atenção à acessibilidade:</strong> <code>order</code> muda só o visual. Leitores de tela e a tecla <kbd>Tab</kbd> continuam seguindo a ordem do HTML. Use com cuidado.</p>
+      </div>
+
+      <h3>margin: auto — o truque do espaço</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="demo f-margem" role="group" aria-label="Item empurrado para a direita com margin auto">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+          </div>
+          <figcaption>A margem automática absorve todo o espaço livre e empurra o último item.</figcaption>
+        </figure>
+<pre><code>.item:last-child {
+  margin-left: auto;
+}</code></pre>
+      </div>
+
+      <h3>Playground dos itens</h3>
+      <p>Aqui você mexe nas regras do <strong>item 2</strong> e do container ao mesmo tempo.</p>
+      <div class="playground" data-playground>
+        <div class="controles">
+          <div class="controle">
+            <label for="pi-ai">align-items (container)</label>
+            <select id="pi-ai" data-prop="align-items">
+              <option>flex-start</option><option>center</option><option>flex-end</option><option>stretch</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pi-grow">flex-grow (item 2)</label>
+            <select id="pi-grow" data-prop="flex-grow" data-item="2" data-padrao="0">
+              <option>0</option><option>1</option><option>2</option><option>3</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pi-self">align-self (item 2)</label>
+            <select id="pi-self" data-prop="align-self" data-item="2" data-padrao="auto">
+              <option>auto</option><option>flex-start</option><option>center</option><option>flex-end</option><option>stretch</option>
+            </select>
+          </div>
+          <div class="controle">
+            <label for="pi-order">order (item 2)</label>
+            <select id="pi-order" data-prop="order" data-item="2" data-padrao="0">
+              <option>0</option><option>-1</option><option>1</option><option>2</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div class="demo demo-alta" data-alvo data-base="display: flex; gap: 0.5rem;" role="group" aria-label="Resultado do playground dos itens">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+          </div>
+          <pre><code data-saida></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="secao" id="aplicacao" aria-labelledby="t-aplic">
+      <h2 id="t-aplic">4. Aplicações reais</h2>
+      <p>Estes quatro padrões resolvem a maior parte dos layouts do dia a dia.</p>
+
+      <h3>a) Barra de navegação</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="f-nav" role="group" aria-label="Exemplo de barra de navegação">
+            <strong>Logo</strong>
+            <ul><li>Início</li><li>Sobre</li><li>Contato</li></ul>
+          </div>
+        </figure>
+<pre><code>.barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.barra ul {
+  display: flex;
+  gap: 1rem;
+}</code></pre>
+      </div>
+
+      <h3>b) Centralizar no meio (horizontal e vertical)</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="demo f-centro" role="group" aria-label="Item centralizado">
+            <div class="item">Centro</div>
+          </div>
+        </figure>
+<pre><code>.caixa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 9rem;
+}</code></pre>
+      </div>
+
+      <h3>c) Cards que quebram de linha</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="demo f-cards" role="group" aria-label="Cards em flex wrap">
+            <div class="item">Card 1</div><div class="item">Card 2</div><div class="item">Card 3</div>
+            <div class="item">Card 4</div><div class="item">Card 5</div>
+          </div>
+          <figcaption>Diminua a janela: os cards quebram de linha automaticamente.</figcaption>
+        </figure>
+<pre><code>.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.cards .card {
+  flex: 1 1 110px;
+}</code></pre>
+      </div>
+
+      <h3>d) Rodapé sempre no fim da página</h3>
+      <div class="exemplo">
+        <figure>
+          <div class="f-pagina" role="group" aria-label="Página com rodapé no fim">
+            <div class="topo-mini">Cabeçalho</div>
+            <div class="conteudo-mini">Pouco conteúdo…</div>
+            <div class="rodape-mini">Rodapé</div>
+          </div>
+        </figure>
+<pre><code>body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+footer {
+  margin-top: auto;
+}</code></pre>
+      </div>
+
+      <div class="nota">
+        <p><strong>Neste próprio hub:</strong> o menu de navegação, os botões "Adicionar/Remover item" e a barra "Anterior/Próxima" usam Flexbox.</p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="secao" id="atividade" aria-labelledby="t-ativ">
+      <h2 id="t-ativ">5. Atividade prática</h2>
+      <ol>
+        <li>Crie 4 caixas dentro de um container e coloque-as lado a lado com <code>display: flex</code>.</li>
+        <li>Use <code>justify-content: space-between</code> e depois <code>center</code>. O que muda?</li>
+        <li>Troque para <code>flex-direction: column</code>. Quais eixos mudaram de papel?</li>
+        <li>Dê <code>flex: 1</code> a todas as caixas e depois <code>flex: 2</code> a uma delas.</li>
+        <li>Monte uma barra de navegação com logo à esquerda e links à direita.</li>
+        <li>Desafio: centralize uma caixa no meio da tela (horizontal e vertical).</li>
+      </ol>
+    </section>
+
+    <!-- 6 -->
+    <section class="secao" id="teste" aria-labelledby="t-teste">
+      <h2 id="t-teste">6. Área de teste</h2>
+      <p>Edite o CSS do container e veja o resultado na hora. Declarações inválidas são simplesmente ignoradas.</p>
+      <div class="teste">
+        <div>
+          <label for="editor-flex">CSS do container</label>
+<textarea id="editor-flex" data-editor data-alvo="alvo-flex" spellcheck="false" rows="7">display: flex;
+justify-content: space-around;
+align-items: center;
+gap: 1rem;
+flex-wrap: wrap;
+min-height: 10rem;</textarea>
+          <div class="botoes"><button type="button" data-reset="editor-flex">Restaurar código inicial</button></div>
+        </div>
+        <div>
+          <p id="rotulo-flex" class="legenda">Resultado:</p>
+          <div class="demo" id="alvo-flex" role="group" aria-labelledby="rotulo-flex">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="entre-aulas" aria-label="Navegação entre aulas">
+      <a href="index.html"><span aria-hidden="true">⬅</span>&nbsp;Hub</a>
+      <a href="grid.html">Próxima: Grid&nbsp;<span aria-hidden="true">➡</span></a>
+    </nav>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p>Sites para estudar:</p>
+      <ul>
+        <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">Mozilla (MDN) — CSS</a></li>
+        <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS-Tricks — Guia de Flexbox</a></li>
+        <li><a href="https://flexboxfroggy.com/#pt-br">Flexbox Froggy (jogo)</a></li>
+      </ul>
+      <p>Feito para a atividade de IHC — © 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,63 @@
+/* Grid — estilos das demonstrações desta página */
+
+/* 3 colunas iguais */
+.g-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+
+/* Colunas com tamanhos diferentes */
+.g-mista { display: grid; grid-template-columns: 110px 1fr 2fr; gap: 0.5rem; }
+
+/* Linhas com altura definida */
+.g-linhas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 3rem 6rem;
+  gap: 0.5rem;
+}
+
+/* Item ocupando várias células */
+.g-span { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.g-span .destaque { grid-column: 1 / 3; grid-row: 1 / 3; display: grid; place-items: center; }
+.g-span .largo { grid-column: span 2; }
+
+/* Layout de página com áreas nomeadas */
+.g-areas {
+  display: grid;
+  grid-template-areas:
+    "cabecalho cabecalho"
+    "menu      conteudo"
+    "rodape    rodape";
+  grid-template-columns: 110px 1fr;
+  grid-template-rows: auto 7rem auto;
+  gap: 0.5rem;
+}
+.g-areas .a-cabecalho { grid-area: cabecalho; }
+.g-areas .a-menu      { grid-area: menu; }
+.g-areas .a-conteudo  { grid-area: conteudo; }
+.g-areas .a-rodape    { grid-area: rodape; }
+
+/* Responsivo sem media query: auto-fit + minmax (arraste o canto para redimensionar) */
+.g-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+  resize: horizontal;
+  overflow: auto;
+  max-width: 100%;
+  min-width: 160px;
+}
+
+/* Alinhamento dentro das células */
+.g-alinha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 4.5rem;
+  gap: 0.5rem;
+  justify-items: center;
+  align-items: center;
+}
+.g-alinha .item { min-width: 0; padding-inline: 0.6rem; }
+
+/* Playground: células com altura mínima para ver o alinhamento */
+.demo[data-alvo] { min-height: 12rem; }
+.demo[data-alvo] .item { min-width: 0; }
+.demo[data-alvo] { grid-auto-rows: minmax(4rem, auto); }

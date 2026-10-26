@@ -1,0 +1,69 @@
+/* Flexbox — estilos das demonstrações desta página */
+
+/* Sem flex: itens em bloco, um embaixo do outro */
+.f-sem { display: block; }
+.f-sem .item { margin-bottom: 0.5rem; }
+.f-sem .item:last-child { margin-bottom: 0; }
+
+/* Com flex: itens lado a lado */
+.f-linha { display: flex; gap: 0.5rem; }
+
+/* Alturas diferentes para ver align-items / align-self */
+.f-alturas { display: flex; gap: 0.5rem; align-items: flex-start; min-height: 9rem; }
+.f-alturas .alto  { padding-block: 2rem; }
+.f-alturas .medio { padding-block: 1rem; }
+
+/* flex-grow: itens dividem o espaço sobrante */
+.f-grow { display: flex; gap: 0.5rem; }
+.f-grow .item:nth-child(1) { flex: 0 0 auto; }
+.f-grow .item:nth-child(2) { flex: 1; }
+.f-grow .item:nth-child(3) { flex: 2; }
+
+/* flex-basis + shrink */
+.f-basis { display: flex; gap: 0.5rem; }
+.f-basis .item { flex: 1 1 140px; }
+
+/* order e align-self */
+.f-order { display: flex; gap: 0.5rem; min-height: 8rem; }
+.f-order .item:nth-child(1) { order: 3; }
+.f-order .item:nth-child(2) { order: 1; align-self: flex-end; }
+.f-order .item:nth-child(3) { order: 2; align-self: center; }
+
+/* margin: auto empurra o item para o lado */
+.f-margem { display: flex; gap: 0.5rem; }
+.f-margem .item:last-child { margin-left: auto; }
+
+/* Aplicação 1: barra de navegação */
+.f-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+.f-nav strong { color: #1e3a8a; }
+.f-nav ul { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+
+/* Aplicação 2: centralizar no meio da caixa */
+.f-centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 9rem;
+}
+
+/* Aplicação 3: cards que quebram de linha */
+.f-cards { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.f-cards .item { flex: 1 1 110px; padding-block: 1.25rem; }
+
+/* Aplicação 4: rodapé empurrado para o fim */
+.f-pagina { display: flex; flex-direction: column; min-height: 12rem; background: #fff; border: 1px solid #94a3b8; border-radius: 8px; }
+.f-pagina .topo-mini, .f-pagina .rodape-mini { background: #1e3a8a; color: #fff; padding: 0.5rem 0.9rem; font-weight: 700; }
+.f-pagina .conteudo-mini { padding: 0.5rem 0.9rem; }
+.f-pagina .rodape-mini { margin-top: auto; }
+
+/* Playground: itens um pouco maiores para o wrap aparecer */
+.demo[data-alvo] .item { min-width: 5.5rem; }
