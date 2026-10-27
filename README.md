@@ -19,7 +19,7 @@ Playground interativo.
 Exercícios práticos.
 Área para testar CSS.
 Conteúdo
-
+ 
 Flexbox: organização de itens, alinhamento, espaçamento, direção e responsividade.
 
 Grid: organização em linhas e colunas, áreas nomeadas, espaçamento e layouts responsivos.
