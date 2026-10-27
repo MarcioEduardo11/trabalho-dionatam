@@ -1,7 +1,3 @@
-// Hub Flexbox e Grid — JavaScript dos playgrounds e da área de teste.
-// As páginas continuam legíveis sem JavaScript; ele só adiciona interatividade.
-
-// ---------- 1) Playgrounds: selects que alteram o container (ou um item) ----------
 document.querySelectorAll('[data-playground]').forEach((pg) => {
   const alvo = pg.querySelector('[data-alvo]');
   const saida = pg.querySelector('[data-saida]');
@@ -10,7 +6,6 @@ document.querySelectorAll('[data-playground]').forEach((pg) => {
   const base = alvo.dataset.base || '';
 
   function atualizar() {
-    // limpa estilos anteriores
     alvo.style.cssText = base;
     Array.from(alvo.children).forEach((filho) => { filho.style.cssText = ''; });
 
@@ -22,14 +17,12 @@ document.querySelectorAll('[data-playground]').forEach((pg) => {
       const n = s.dataset.item;
 
       if (n) {
-        // propriedade de ITEM: só aplica/mostra se mudou do valor padrão
         if (s.value === s.dataset.padrao) return;
         const filho = alvo.children[Number(n) - 1];
         if (!filho) return;
         filho.style.setProperty(prop, s.value);
         (porItem[n] = porItem[n] || []).push(`${prop}: ${s.value};`);
       } else {
-        // propriedade de CONTAINER
         alvo.style.setProperty(prop, s.value);
         linhasContainer.push(`${prop}: ${s.value};`);
       }
@@ -44,7 +37,6 @@ document.querySelectorAll('[data-playground]').forEach((pg) => {
 
   selects.forEach((s) => s.addEventListener('change', atualizar));
 
-  // Botões de adicionar / remover itens
   const botaoAdd = pg.querySelector('[data-add]');
   const botaoRem = pg.querySelector('[data-remove]');
   const anunciar = () => {
@@ -74,7 +66,6 @@ document.querySelectorAll('[data-playground]').forEach((pg) => {
   atualizar();
 });
 
-// ---------- 2) Área de teste: o aluno edita o CSS e vê o resultado ----------
 document.querySelectorAll('[data-editor]').forEach((editor) => {
   const alvo = document.getElementById(editor.dataset.alvo);
   const inicial = editor.value;
