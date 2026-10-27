@@ -1,12 +1,8 @@
-/* Grid — estilos das demonstrações desta página */
 
-/* 3 colunas iguais */
 .g-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
 
-/* Colunas com tamanhos diferentes */
 .g-mista { display: grid; grid-template-columns: 110px 1fr 2fr; gap: 0.5rem; }
 
-/* Linhas com altura definida */
 .g-linhas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -14,12 +10,10 @@
   gap: 0.5rem;
 }
 
-/* Item ocupando várias células */
 .g-span { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
 .g-span .destaque { grid-column: 1 / 3; grid-row: 1 / 3; display: grid; place-items: center; }
 .g-span .largo { grid-column: span 2; }
 
-/* Layout de página com áreas nomeadas */
 .g-areas {
   display: grid;
   grid-template-areas:
@@ -35,7 +29,6 @@
 .g-areas .a-conteudo  { grid-area: conteudo; }
 .g-areas .a-rodape    { grid-area: rodape; }
 
-/* Responsivo sem media query: auto-fit + minmax (arraste o canto para redimensionar) */
 .g-auto {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -46,7 +39,6 @@
   min-width: 160px;
 }
 
-/* Alinhamento dentro das células */
 .g-alinha {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -57,7 +49,6 @@
 }
 .g-alinha .item { min-width: 0; padding-inline: 0.6rem; }
 
-/* Playground: células com altura mínima para ver o alinhamento */
 .demo[data-alvo] { min-height: 12rem; }
 .demo[data-alvo] .item { min-width: 0; }
 .demo[data-alvo] { grid-auto-rows: minmax(4rem, auto); }
