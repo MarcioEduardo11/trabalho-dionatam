@@ -56,7 +56,6 @@ a:hover { color: var(--azul-escuro); }
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* ---------- Cabeçalho ---------- */
 .topo {
   background: var(--azul-escuro);
   color: #fff;
@@ -118,14 +117,12 @@ pre code { background: none; color: inherit; padding: 0; font-size: 0.93rem; }
 .nota strong:first-child { color: var(--azul-escuro); }
 .nota p:last-child { margin-bottom: 0; }
 
-/* ---------- Tabelas ---------- */
 .tabela-rolagem { overflow-x: auto; margin-bottom: 1rem; }
 table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 0.97rem; }
 caption { text-align: left; font-weight: 700; padding-bottom: 0.5rem; color: var(--suave); }
 th, td { text-align: left; padding: 0.6rem 0.8rem; border: 1px solid var(--borda); vertical-align: top; }
 th { background: #e2e8f0; color: var(--azul-escuro); }
 
-/* ---------- Exemplo: texto + demonstração lado a lado ---------- */
 .exemplo {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -136,7 +133,6 @@ th { background: #e2e8f0; color: var(--azul-escuro); }
 .exemplo figure { margin: 0; }
 .exemplo figcaption, .legenda { font-size: 0.92rem; color: var(--suave); margin-top: 0.4rem; }
 
-/* ---------- Demonstrações visuais ---------- */
 .demo {
   background: #f8fafc;
   border: 2px dashed #94a3b8;
@@ -161,7 +157,6 @@ th { background: #e2e8f0; color: var(--azul-escuro); }
 .item:nth-child(6n+5) { background: #be123c; }
 .item:nth-child(6n+6) { background: #0e7490; }
 
-/* ---------- Playground ---------- */
 .playground {
   display: grid;
   grid-template-columns: minmax(220px, 0.8fr) 1.4fr;
@@ -199,7 +194,6 @@ button {
 }
 button:hover { background: var(--azul); color: #fff; }
 
-/* ---------- Área de teste ---------- */
 .teste { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; align-items: start; }
 .teste textarea {
   font-family: var(--fonte-codigo);
@@ -212,7 +206,6 @@ button:hover { background: var(--azul); color: #fff; }
 }
 .teste label { font-weight: 600; display: block; margin-bottom: 0.3rem; }
 
-/* ---------- Cards do hub ---------- */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.25rem; }
 a.card {
   display: block;
@@ -228,7 +221,6 @@ a.card:hover { transform: translateY(-3px); box-shadow: var(--sombra); }
 a.card h2 { font-size: 1.35rem; }
 a.card .ver { color: var(--azul); font-weight: 700; margin: 0; }
 
-/* ---------- Navegação entre aulas ---------- */
 .entre-aulas { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; }
 .entre-aulas a {
   display: inline-flex; align-items: center; min-height: 48px;
@@ -237,14 +229,12 @@ a.card .ver { color: var(--azul); font-weight: 700; margin: 0; }
 }
 .entre-aulas a:hover { background: var(--azul-escuro); color: #fff; }
 
-/* ---------- Rodapé ---------- */
 .rodape { background: #0f172a; color: #e2e8f0; padding: 2rem 1rem; font-size: 0.95rem; }
 .rodape-conteudo { width: min(100%, 960px); margin-inline: auto; }
 .rodape a { color: #bfdbfe; }
 .rodape ul { padding-left: 1.2rem; margin: 0 0 1rem; }
 .rodape p { margin-bottom: 0.5rem; }
 
-/* ---------- Responsividade ---------- */
 @media (max-width: 760px) {
   .playground { grid-template-columns: 1fr; }
   .entre-aulas a { width: 100%; justify-content: center; }
